@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Task 2</title>
+</head>
+
+<body>
+    <p id="res"></p>
+    <script>
+            fetch('https://blog.zsxsoft.com/w2tmp/post.php',{
+                method:"POST",
+                body:"name=汉森",
+                headers:{
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            }).then(function(response) {
+               response.json().then(function(json){
+                    console.log(json);
+                    var message=json.message;
+                    document.getElementById("res").innerHTML=message;
+                });
+            });
+    </script>
+</body>
+</html>

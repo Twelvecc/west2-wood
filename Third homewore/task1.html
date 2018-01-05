@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Task 1</title>
+</head>
+
+<body>
+    <p id="res"></p>
+    <script>
+            fetch('https://blog.zsxsoft.com/w2tmp/get.php?name=汉森', {
+                method: "GET"
+            }).then(function(response) {
+               response.json().then(function(json){
+                    console.log(json);
+                    var message=json.message;
+                    document.getElementById("res").innerHTML=message;
+                });
+            });
+    </script>
+</body>
+</html>
