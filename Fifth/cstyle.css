@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+.cal {
+    width: 210px;
+    margin-left: 0px;
+    overflow: hidden;
+    border: 1px solid #000;
+    padding: 20px;
+    position: relative;
+}
+
+.cal .week {
+    height: 30px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px
+}
+
+.cal .week li {
+    list-style: none;
+    float: left;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.cal .date li {
+    list-style: none;
+    float: left;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.cal .date .past{
+    color:rgb(190, 185, 185);
+}
+
+.cal .date .now{
+    color:rgb(255, 0, 0);
+}

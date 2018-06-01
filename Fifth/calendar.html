@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>日历</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+        <link rel="stylesheet" href="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link href="cstyle.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div class="cal">
+            <a href=## class="before">上个月</a>
+            <span id="title"></span>
+            <a href=## class="after">下个月</a>
+            <ul class="week">
+                <li>日</li>
+                <li>一</li>
+                <li>二</li>
+                <li>三</li>
+                <li>四</li>
+                <li>五</li>
+                <li>六</li>
+            </ul>
+            <ul class="date"></ul>
+        </div>
+
+        <script>
+            var m=0;
+            function getcalendar(m){
+                var d=new Date();
+                var days=[31,28,31,30,31,30,31,31,30,31,30,31];
+                var today=d.getDate();
+                var toyear=d.getFullYear();
+                var tomonth=d.getMonth()+m;
+                /*toyear=toyear+Math.floor(tomonth/12);
+                d.setFullYear(toyear);
+                if(tomonth>12){
+                    tomonth=Math.floor(tomonth/12);
+                }
+                else if (tomonth<1){
+                    tomonth=12+Math.floor(tomonth/12);
+                }*/
+                //判断哪个月
+                d.setMonth(tomonth,1);
+                //判断第一天星期几
+                //d.setDate(1);
+                var week=d.getDay();
+                $(".date").empty();
+                var allday=days[d.getMonth()]; //本月天数
+                for(var i=1;i<=week;i++)
+                {
+                    $(".date").append("<li></li>");
+                }
+                for(var i=1;i<=allday;i++)
+                {
+                    $(".date").append("<li>"+i+"</li>");
+                }
+
+                $(".date li").each(function(){
+                    var val = $(this).text();
+                    //console.log(val);
+                    if(m==0){
+                        if(val<today){
+                        $(this).addClass("past");
+                        }
+                        else if (val==today){
+                            $(this).addClass("now");
+                        }
+                    }
+                    else if (m<0){
+                        $(this).addClass("past");
+                    }
+                });
+                var year=toyear+Math.floor(tomonth/12);
+                var month=Math.floor(tomonth%12);
+                if(tomonth<0){
+                    month=12+month;
+                }
+                $("#title").text(year+"年"+(month+1)+"月");
+            }
+        getcalendar(0);
+        $(".before").click(function(){
+            m--;
+            getcalendar(m);
+        });
+        $(".after").click(function(){
+            m++;
+            getcalendar(m);
+        });
+        $("body").on("swipeleft",function(){
+            m++;
+            getcalendar(m);
+        });
+        $("body").on("swiperight",function(){
+            m--;
+            getcalendar(m);
+        });
+
+            (function(doc,win){
+                var docEl=doc.documentElement,
+                resizeEvt='orientationchange' in window?'orientationchange':'resize',
+                recalc=function(){
+                  var clientWidth=docEl.clientWidth;
+                  if(!clientWidth)return;
+                  docEl.style.fontSize=10*(clientWidth/640)+'px';
+                };
+                if(!doc.addEventListener) return;
+                win.addEventListener(resizeEvt,recalc,false);
+                doc.addEventListener('DOMContentLoaded',recalc,false);
+              })(document,window)
+              
+    </script>
+
+    </body>
